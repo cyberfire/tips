@@ -1,0 +1,100 @@
+Steps to setup a LEMP env and setup a wordpress site
+
+4. install nginx 
+
+1) apt-get install nginx
+2) service nginx restart
+3) check status: nginx status
+4) Using web browser to verify the home page can be viewed
+
+5. install mysql
+
+1) sudo apt-get install mysql-server mysql-client
+- set root passwd
+2) check status by
+service mysql status
+
+6. install php
+
+1) apt-get install php php-mysql php-fpm
+2) revised /etc/php/7.0/fpm/php.ini
+;cgi.fix_pathinfo=1  ===> cgi.fix_pathinfo=0
+3) restart php-fpm service
+service php7.0-fpm restart
+4) check fpm status
+service php7.0-fpm status
+
+7. verify php installation
+
+1) create a phpinfo.php in webservice root directory. 
+
+Checking nginx configuration file:
+	/etc/nginx/sites-available/default
+	
+cat > phpinfo.php <<EOF
+<?php
+phpinfo()
+?>
+EOF
+2) make nginx can use php-fpm service
+ revised /etc/nginx/sites-available/default about php
+ - add index.php into index item 
+ - revise the location ~ \.php$ to below
+ 
+ 3) restart nginx
+ service nginx restart
+4) verify phpinfo
+visit: http://ip/phpinfo.php
+
+
+8. install wordpress
+1) download the package from wordpress.org
+2) create a database for wordpress in mysql
+
+$ mysql -u adminusername -p
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 5340 to server version: 3.23.54
+ 
+Type 'help;' or '\h' for help. Type '\c' to clear the buffer.
+ 
+mysql> CREATE DATABASE <databasename>;
+Query OK, 1 row affected (0.00 sec)
+ 
+mysql> GRANT ALL PRIVILEGES ON <databasename>.* TO "<wordpress_username>"@"localhost"
+    -> IDENTIFIED BY "<password>";
+Query OK, 0 rows affected (0.00 sec)
+  
+mysql> FLUSH PRIVILEGES;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> EXIT
+Bye
+
+mysql> grant all privileges on wp_web.* to "wordpress"@"localhost" 
+    -> identified by "thisisatest";
+    
+3) copy wp-config-sample.php to wp-config.php and fill in above info
+
+
+
+4) set nginx web root to the wordpress top directory
+
+5) visit web and setup the site
+
+6) revisit the home page and setup the new site
+
+
+9. Install the theme (gridalicious)
+
+Download the gridalicious.1.6.2 and upack in wp-content/theme
+
+10. Disable the default home link in page menu and use a static page to replace it
+
+in wp-content/themes/gridalicious/inc/gridalicious-core.php
+
+function gridalicious_page_menu_args( $args ) {
+	$args['show_home'] = true;  =====> change true to false
+	return $args;
+}
+
