@@ -3,4 +3,10 @@ systemctl set-default multi-user.target
 
 2. Enabling network connection before user login
 
-For all people who is using Ubuntu 16. You should go to /etc/NetworkManager/system-connections/ Where you'll see the file which contains your internet settings. Edit it, find the line with permission and delete all after = Restart and you can connect before login
+For all people who is using Ubuntu 16. You should go to /etc/NetworkManager/system-connections/ 
+Where you'll see the file which contains your internet settings. 
+Edit it, find the line with permission and delete all after = Restart and you can connect before login
+
+
+3. query the file list in a debian package
+dpkg-query -L package-name
