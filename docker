@@ -1,0 +1,17 @@
+Build image
+
+docker build -t <repo> <dir>
+
+DockerFile:
+<ENTRYPOINT>
+<CMD> Para to <ENTRYPOINT>
+
+
+Rename Image
+docker tag ...
+
+
+Detailed Manual
+
+https://docs.docker.com/engine/reference/
+
