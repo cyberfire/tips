@@ -1,0 +1,11 @@
+
+
+1. Juypter Notebook
+
+switch to use python 2 or python 3  for notebook
+
+python2 -m pip install ipykernel
+python2 -m ipykernel install
+python2 -m ipykernel install --user
+http://ipython.readthedocs.io/en/stable/install/kernel_install.html
+
