@@ -26,5 +26,28 @@ cd pip-8.1.2
 sudo python setup.py install
 
 
+5. Multi-Arch
+
+Ref: https://wiki.debian.org/Multiarch/HOWTO
+Add:
+dpkg --add-architecture <arch>
+apt-get update
+Remove:
+dpkg --remove-architecture <arch>
+apt-get purge ".*:<arch>"
+
+Exapmle:
+
+eb [arch=amd64] http://cn.archive.ubuntu.com/ubuntu xenial main restricted universe multiverse
+deb [arch=amd64] http://cn.archive.ubuntu.com/ubuntu xenial-updates main restricted universe multiverse
+deb [arch=amd64] http://security.ubuntu.com/ubuntu xenial-security main restricted universe multiverse
+
+deb [arch=arm64] http://ports.ubuntu.com/ xenial main universe
+deb-src [arch=arm64] http://ports.ubuntu.com/ xenial main universe
+
+
+
+
+
 
 
