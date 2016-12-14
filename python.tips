@@ -9,3 +9,10 @@ python2 -m ipykernel install
 python2 -m ipykernel install --user
 http://ipython.readthedocs.io/en/stable/install/kernel_install.html
 
+2. Disable password authenication for Notebook
+ generate jupyter notebook configure file
+ jupyter  notebook --generate-config
+ will create file ~/.jupyter/jupyter_notebook_config.py
+ 
+Find the lines with token and password, uncomment the lines and set the value to empty string
+
