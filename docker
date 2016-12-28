@@ -15,3 +15,10 @@ Detailed Manual
 
 https://docs.docker.com/engine/reference/
 
+
+Let docker to use USB device:
+
+docker run -t -i --privileged -v /dev/bus/usb:/dev/bus/usb ubuntu bash
+
+docker run -t -i --device=/dev/ttyUSB0 ubuntu bash
+
