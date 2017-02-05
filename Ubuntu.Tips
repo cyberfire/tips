@@ -11,6 +11,8 @@ Edit it, find the line with permission and delete all after = Restart and you ca
 3. query the file list in a debian package
 dpkg-query -L package-name
 
+package info are located in directory:
+/var/lib/dpkg/info
 
 4. pip upgrade (Unbuntu 16.04)
 
