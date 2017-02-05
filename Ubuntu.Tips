@@ -47,6 +47,19 @@ deb-src [arch=arm64] http://ports.ubuntu.com/ xenial main universe
 
 
 
+6. PAE
+
+Add the PAE flag to processor information 
+
+To add the PAE flag to the processor information stored in /proc/cpuinfo, run the following:
+
+  cat /proc/cpuinfo | sed 's/flags\t*:/& pae/' > /tmp/cpuinfo_pae
+  sudo mount -o bind /tmp/cpuinfo_pae /proc/cpuinfo
+  sudo mount -o remount,ro,bind /proc/cpuinfo
+After you have ran those commands, run
+
+  grep flags /proc/cpuinfo
+If the flag was correctly added, the command returns a line that starts with "flags :" and contains the flag "pae".
 
 
 
