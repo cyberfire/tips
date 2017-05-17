@@ -65,4 +65,10 @@ If the flag was correctly added, the command returns a line that starts with "fl
 
 
 
+7. Boot ubuntu into Text
 
+sudo systemctl set-default multi-user.target
+
+8. Setup Wifi in command line
+
+nmcli device wifi connect APNAME password PASSWD
