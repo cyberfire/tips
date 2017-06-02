@@ -72,3 +72,9 @@ sudo systemctl set-default multi-user.target
 8. Setup Wifi in command line
 
 nmcli device wifi connect APNAME password PASSWD
+
+
+9. Device tree check
+(1) /proc/device-tree
+(2) dtc -I fs /sys/firmware/devicetree/base
+
