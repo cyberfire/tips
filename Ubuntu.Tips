@@ -1,6 +1,13 @@
 1. Setting Ubuntu to boot in text
 systemctl set-default multi-user.target
 
+restore
+systemctl set-default graphical.target
+
+It is to change this file:
+/etc/systemd/system/default.target
+
+
 2. Enabling network connection before user login
 
 For all people who is using Ubuntu 16. You should go to /etc/NetworkManager/system-connections/ 
