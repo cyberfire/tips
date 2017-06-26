@@ -1,6 +1,25 @@
 
-(1) How Google Translate squeezes deep learning onto a phone
-https://research.googleblog.com/2015/07/how-google-translate-squeezes-deep.html
+## Tensorflow
 
-(2) Deep learning inference possible in embedded systems thanks to TrueNorth
-https://www.ibm.com/blogs/research/2016/09/deep-learning-possible-embedded-systems-thanks-truenorth/
+1. Save and Load model by meta graph
+
+### save
+// build graph ...
+saver=tf.train.Saver()
+//run seession
+saver.save(sess,"/tmp/model.ckpt");
+
+### restore
+//create a session 
+   sess = tf.Session()
+    saver=tf.train.import_meta_graph("/tmp/model.ckpt.meta")
+    save_path=saver.restore(sess,"/tmp/model.ckpt");
+
+
+2. Save and load mobel by freeze
+
+https://gist.githubusercontent.com/morgangiraud/249505f540a5e53a48b0c1a869d370bf/raw/6cb0b4d497925517316a92f935ce5dccb6aafd17/medium-tffreeze-1.py
+
+
+https://github.com/abdasgupta/tensorflow-serving-ppc64le/blob/flowers-export/tensorflow_serving/example/inception_export.py
+
