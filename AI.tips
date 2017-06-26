@@ -19,7 +19,38 @@ saver.save(sess,"/tmp/model.ckpt");
 2. Save and load mobel by freeze
 
 https://gist.githubusercontent.com/morgangiraud/249505f540a5e53a48b0c1a869d370bf/raw/6cb0b4d497925517316a92f935ce5dccb6aafd17/medium-tffreeze-1.py
-
-
 https://github.com/abdasgupta/tensorflow-serving-ppc64le/blob/flowers-export/tensorflow_serving/example/inception_export.py
+
+The more offically method is:
+(1) Get the graph definition by:
+   tf.train.write_graph(sess.graph.as_graph_def(),"./models/save","graph.pb");
+   
+(2) Get the weight data by save checkpoint 
+     saver=tf.train.Saver()
+     saver.save(sess,"./models/save");
+
+(3) Using the freeze_graph.py inside tensorflow/python/tools
+     --input_graph  <saved_graph_pb>
+     --input_checkpoint <saved_checkpoint_dir>+prefix
+     --output_graph <file_to_save>
+     --output_node_names <node1,node2>
+     
+3.  Generate libtensorflow.so for other language to use
+bazel build //tensorflow:libtensorflow.so
+
+4. A simple C++ sample program
+
+https://medium.com/jim-fleming/loading-a-tensorflow-graph-with-the-c-api-4caaff88463f
+
+
+
+
+
+
+  
+ 
+
+
+
+
 
