@@ -103,6 +103,15 @@ TF_DeleteImportGraphDefOptions(import_opts);
 TF_DeleteGraph(graph);
 TF_DeleteStatus(s);
  
+----------------------------------
+Urgly code to reuse a pre-allocated buffer in C++...
+const int64_t tensorDims[4] = {1,inputheight,inputwidth,3};
+int *imNumPt = new int(1);
+TF_Tensor* tftensor = TF_NewTensor(TF_DataType::TF_UINT8, tensorDims, 4,
+                           cameraImg.data, inputheight * inputwidth * 3,
+                           NULL, imNumPt);
+Tensor inputImg = tensorflow::TensorCApi::MakeTensor(tftensor->dtype, tftensor->shape, tftensor->buffer);
+
 
 
 
