@@ -112,3 +112,10 @@ for url in $(curl -s $MIRROR_LIST | grep -Po 'http://.*(?=">http</a>)'); do
   # if successful, output the URL
   [ $? -eq "0" ] && echo "FOUND: $url"
 done
+
+
+10. check the size of physical memory and virtual memory process used
+
+
+ps -ax -o 'pid,pcpu,rsz,vsz' |  sort -nrk5
+
