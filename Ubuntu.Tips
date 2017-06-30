@@ -119,3 +119,27 @@ done
 
 ps -ax -o 'pid,pcpu,rsz,vsz' |  sort -nrk5
 
+
+11. Add a swap partition manually
+
+
+sudo mkswap /dev/XXX
+If the previous command outputted an alphanumeric UUID, copy that now. Otherwise, find the UUID by running blkid again. Copy the UUID associated with /dev/XXX
+
+sudo blkid
+Now edit your /etc/fstab file to register your swap file. (I'm a Vim guy, but Nano is installed by default)
+
+sudo nano /etc/fstab
+On a separate line, enter the following information. Replace the X's with the UUID (without quotes)
+
+UUID=XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX none swap sw,pri=5 0 0
+Save /etc/fstab, exit your text editor, and run the following command:
+
+sudo swapon -a
+If you get an error claiming it can't find your UUID, go back and edit /etc/fstab. Replace the UUID=XXX.. bit with the original /dev/XXX information.
+
+sudo nano /etc/fstab
+# Replace the UUID with /dev/XXX
+/dev/XXX none swap sw,pri=5 0 0
+
+
