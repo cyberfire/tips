@@ -143,3 +143,6 @@ sudo nano /etc/fstab
 /dev/XXX none swap sw,pri=5 0 0
 
 
+12. Useful DNSMASQ
+
+dnsmasq -u lxc-dnsmasq --strict-order --bind-interfaces --pid-file=/run/lxc/dnsmasq.pid --listen-address 10.0.3.1 --dhcp-range 10.0.3.2,10.0.3.254
