@@ -146,3 +146,9 @@ sudo nano /etc/fstab
 12. Useful DNSMASQ
 
 dnsmasq -u lxc-dnsmasq --strict-order --bind-interfaces --pid-file=/run/lxc/dnsmasq.pid --listen-address 10.0.3.1 --dhcp-range 10.0.3.2,10.0.3.254
+
+
+13. install ubuntu fs
+
+debootstrap --arch arm64 --foreign --verbose --components=main,universe --include=apt-transport-https,ssh,vim,language-pack-en xenial /var/cache/lxc/xenial/partial-arm64 http://ports.ubuntu.com/ubuntu-ports
+
