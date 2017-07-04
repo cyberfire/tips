@@ -113,6 +113,12 @@ TF_Tensor* tftensor = TF_NewTensor(TF_DataType::TF_UINT8, tensorDims, 4,
 Tensor inputImg = tensorflow::TensorCApi::MakeTensor(tftensor->dtype, tftensor->shape, tftensor->buffer);
 
 
+8. Build Tensorflow 1.2 on ARM
+Need to apply patch below to Eigen
+          https://bitbucket.org/eigen/eigen/commits/d781c1de9834/
+
+
+
 
 
 
