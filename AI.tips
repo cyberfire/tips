@@ -114,8 +114,56 @@ Tensor inputImg = tensorflow::TensorCApi::MakeTensor(tftensor->dtype, tftensor->
 
 
 8. Build Tensorflow 1.2 on ARM
+
 Need to apply patch below to Eigen
           https://bitbucket.org/eigen/eigen/commits/d781c1de9834/
+          
+https://cyberfire.github.io/tensorflow/rk3399/howto%20build%20tensorflow%20on%20firefly.md
+
+9. Tensorflow Quantization
+
+Please refers to:
+         https://www.tensorflow.org/performance/quantization
+         
+This guide works for the example in 
+          tensorflow/contrib/pi_examples/label_image
+
+The working step about tensorflow/examples/label_image/label_image is as below:
+       
+(1) Add  "//tensorflow/core/kernels:quantized_ops" into tensorflow/examples/label_image/BUILD
+
+(2) Build label image and tools
+         bazel build -c opt //tensorflow/examples/label_image
+         bazel build tensorflow/tools/graph_transforms:transform_graph
+
+(3) Quantize graph
+
+         bazel-bin/tensorflow/tools/graph_transforms/transform_graph \
+               --in_graph=tensorflow/examples/label_image/data/inception_v3_2016_08_28_frozen.pb \
+               --outputs="InceptionV3/Predictions/Reshape_1" \
+               --out_graph=/tmp/quantized_graph.pb \
+               --inputs='input' \
+               --transforms='add_default_attributes strip_unused_nodes(type=float, shape="1,299,299,3")
+                    remove_nodes(op=Identity, op=CheckNumerics) fold_constants(ignore_errors=true)
+                    fold_batch_norms fold_old_batch_norms quantize_weights quantize_nodes
+                    strip_unused_nodes sort_by_execution_order'
+                    
+ (4) Run the graph
+          
+          bazel-bin/tensorflow/examples/label_image/label_image \
+                --image=tensorflow/examples/label_image/data/grace_hopper.jpg \
+                --graph=/tmp/quantized_graph.pb 
+         
+  
+
+
+
+
+
+ 
+
+
+
 
 
 
