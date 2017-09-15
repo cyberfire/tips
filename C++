@@ -38,7 +38,7 @@ test3(d) ===> T is dummy
 test2(dummy(100)) ===> T is dummy
 
 Now, this can explain how std::forward works in test2(T&&):
-std::forward always return T&&, so that if T is dummy&, T&& will colapse to dummy&, while T is dummy, T&& will become dumy&&.
+std::forward always return T&&, so that if T is dummy&, T&& will collapse to dummy&, while T is dummy, T&& will become dumy&&.
 
 A good interview code:
 
@@ -94,6 +94,29 @@ int main(void)
 
     return 0;
 }
+
+------------------------
+Add declare of forward and move here:
+
+template< class T >
+T&& forward( typename std::remove_reference<T>::type& t ) noexcept;
+
+template< class T >
+T&& forward( typename std::remove_reference<T>::type&& t ) noexcept;
+
+
+template< class T >
+typename std::remove_reference<T>::type&& move( T&& t ) noexcept;
+
+
+-------------------
+Refs:
+http://en.cppreference.com/w/cpp/language/reference
+http://en.cppreference.com/w/cpp/language/template_argument_deduction
+http://en.cppreference.com/w/cpp/utility/forward
+http://en.cppreference.com/w/cpp/utility/move
+
+
 
 
 
