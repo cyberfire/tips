@@ -1,0 +1,104 @@
+1. Template Deduce
+
+
+
+struct A {
+//    A(dummy && n) { std::cout << "rvalue overload, n=" << n.val << "\n"; }
+//    A(dummy& n)  { std::cout << "lvalue overload, n=" << n.val << "\n"; }
+};
+
+
+template <typename T>
+A* test(T& a)
+{
+   return new A(std::forward<T>(a));
+   //return new A(a);
+}
+
+template <typename T>
+A* test2(T&& a)
+{
+   return new A(std::forward<T>(a));
+   //return new A(a);
+}
+
+template <typename T>
+A* test3(T a)
+{
+   return new A(std::forward<T>(a));
+   //return new A(a);
+}
+
+dummy d(100) or dummy d&=other;
+
+test(d) ===> T is dummy
+test2(d) ===> T is dummy&
+test3(d) ===> T is dummy
+
+test2(dummy(100)) ===> T is dummy
+
+Now, this can explain how std::forward works in test2(T&&):
+std::forward always return T&&, so that if T is dummy&, T&& will colapse to dummy&, while T is dummy, T&& will become dumy&&.
+
+A good interview code:
+
+struct dummy
+{
+   dummy(int n):val(n){};
+   int val;
+};
+
+struct A {
+    A(dummy && n) { std::cout << "rvalue overload, n=" << n.val << "\n"; }
+    A(dummy& n)  { std::cout << "lvalue overload, n=" << n.val << "\n"; }
+};
+
+
+dummy get_one(void)
+{
+   dummy * p= new dummy(200);
+
+   return *p;
+}
+
+template <typename T>
+A* test(T& a)
+{
+   return new A(std::forward<T>(a));
+}
+
+template <typename T>
+A* test2(T&& a)
+{
+   return new A(std::forward<T>(a));
+}
+
+template <typename T>
+A* test3(T a)
+{
+   return new A(std::forward<T>(a));
+}
+
+int main(void)
+{
+
+    dummy a(100);
+
+    dummy& b=a;
+
+
+
+   test(a);
+   test2(a);
+   test3(a);
+
+    return 0;
+}
+
+
+
+
+
+
+
+
