@@ -18,6 +18,8 @@ saver.save(sess,"/tmp/model.ckpt");
 
 2. Save and load mobel by freeze
 
+http://cv-tricks.com/tensorflow-tutorial/save-restore-tensorflow-models-quick-complete-tutorial/
+
 https://gist.githubusercontent.com/morgangiraud/249505f540a5e53a48b0c1a869d370bf/raw/6cb0b4d497925517316a92f935ce5dccb6aafd17/medium-tffreeze-1.py
 https://github.com/abdasgupta/tensorflow-serving-ppc64le/blob/flowers-export/tensorflow_serving/example/inception_export.py
 
@@ -123,8 +125,10 @@ https://cyberfire.github.io/tensorflow/rk3399/howto%20build%20tensorflow%20on%20
 9. Tensorflow Quantization
 
 Please refers to:
-         https://www.tensorflow.org/performance/quantization
-         
+https://github.com/google/gemmlowp/blob/master/doc/quantization.md
+https://www.tensorflow.org/performance/quantization
+
+
 This guide works for the example in 
           tensorflow/contrib/pi_examples/label_image
 
