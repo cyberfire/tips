@@ -158,4 +158,14 @@ debootstrap --arch arm64 --foreign --verbose --components=main,universe --includ
 Please refer to manual of perf_event_open
 
 
+15. Cross compile protobuf
+
+     From https://github.com/eurotech/edc-examples/wiki/Cross-compiling-protobuf-for-ARM-architecture
+     
+     step 1) build the protobuf to get the protoc in host and copy it in /tmp
+     step 2) reconfig with below command:
+            
+            ./configure --prefix=/tmp/cross-install --host=aarch64-linux --with-protoc=/tmp/protoc CC=aarch64-linux-gnu-gcc CXX=aarch64-linux-gnu-g++
+            
+     step 3)  build as normal
 
