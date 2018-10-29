@@ -1,0 +1,54 @@
+
+
+--------------------------- git hooks --------------
+
+#!/bin/bash
+
+
+# this is a script to force using 'git pull --rebase'
+# as it will decline the merge is not based on origin/branch, but bese on local/branch
+# that is 'git merge origin/master'
+# which probably happens when git pull and the remote branch is newer than local one
+
+# for gitlab
+# please create custom_hooks/ in <progject>.git and copy this script in
+
+ref_name=$1
+rev_old=$2
+rev_new=$3
+
+
+#only check ref/master
+
+if [ $ref_name = "refs/heads/master" ];
+then
+   #if no merge happens, fast-forward 
+   merge_count=`git rev-list --count --merges ${rev_old}..${rev_new}`
+
+   if [ $merge_count = 0 ]
+   then 
+       exit 0
+   fi
+
+   # if merge, check if $rev_old is the base one
+
+   # find out the oldest merge in the main line
+   all_merge_id=`git rev-list --merges --reverse --first-parent ${rev_old}..${rev_new}`
+   merge_id=`echo $all_merge_id| cut -f1 -d' '`
+
+   # move backword one step 
+   child_id=`git rev-parse ${merge_id}^`
+   common_id=`git merge-base $rev_old $child_id`
+
+   #echo git rev-list --merges --reverse --first-parent ${rev_old}..${rev_new}
+   #echo first merge: $merge_id
+   #echo child: $child_id
+   #echo common_id: $common_id
+
+   if [ $common_id = $rev_old ]
+   then 
+         exit 0
+   fi
+
+   exit 1
+fi
