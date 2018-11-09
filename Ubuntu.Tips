@@ -169,3 +169,8 @@ Please refer to manual of perf_event_open
             
      step 3)  build as normal
 
+16. replace tab with 4 space in vi
+
+set ts=4
+:set expandtab
+:%retab!
