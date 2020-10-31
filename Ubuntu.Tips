@@ -174,3 +174,18 @@ Please refer to manual of perf_event_open
 set ts=4
 :set expandtab
 :%retab!
+
+
+17. NVdocker
+
+
+https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#docker
+
+
+run:
+
+https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/user-guide.html
+
+GPUs can be specified to the Docker CLI using either the --gpus option starting with Docker 19.03 or using the environment variable NVIDIA_VISIBLE_DEVICES. This variable controls which GPUs will be made accessible inside the container.
+
+docker run --rm --runtime=nvidia -e NVIDIA_VISIBLE_DEVICES=all nvidia/cuda nvidia-smi
