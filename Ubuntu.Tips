@@ -192,3 +192,9 @@ docker run --rm --runtime=nvidia -e NVIDIA_VISIBLE_DEVICES=all nvidia/cuda nvidi
 
 18. apt-file
 apt-file search "file_path"
+
+
+19. adding new apt repo source with https and get the certification error. Even allow-insecure=yes does not work.
+  It is probably due to ca-certificates not installed
+  
+
